@@ -1,0 +1,35 @@
+<section ng-controller="ManageFriendsController" class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-show="cfr">
+          <b>Friend Requests : </b><br>
+          <div ng-if="f.status==='0' && f.friend._id===user._id" class="friend-request" ng-repeat=" f in  friends | orderBy:'-created' track by $index" ng-init="u=f.user">
+            <img ng-src="{{u.profileImageURL}}"/><br/>
+            <span title="{{u.firstName}} {{u.lastName}}">
+              {{(u.firstName + " " + u.lastName).length<=10?(u.firstName + " " + u.lastName):(u.firstName + " " + u.lastName).substring(0,5)}}<br/>
+              <a ng-click="accept(u)" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-ok"></i></a>
+              <a ng-click="decline(u)" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
+            </span>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <b>Friends : </b><br>
+          <div ng-if="f.status==='1'" class="friend-request" ng-repeat=" f in  friends | orderBy:'-created' track by $index" ng-init="u=f.friend._id===user._id?f.user:f.friend">
+            <img ng-src="{{u.profileImageURL}}"/><br/>
+            <span title="{{u.firstName}} {{u.lastName}}">
+              {{(u.firstName + " " + u.lastName).length<=10?(u.firstName + " " + u.lastName):(u.firstName + " " + u.lastName).substring(0,5)}}<br/>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-hide="friends.length">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="alert alert-warning">
+        No friends found! Try <a ui-sref="search">Searching</a> for people.
+      </div>
+    </div>
+  </div>
+</section>

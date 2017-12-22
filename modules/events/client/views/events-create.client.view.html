@@ -1,0 +1,263 @@
+<div ng-controller="EventsCreateController" class="container create-events-bg subpage">
+  <div class="subpage-wrapper container">
+    <div class="row">
+      <div class=" col-lg-6 col-lg-offset-3">
+        <div class="row subpage-page-heading">
+
+          <div ui-sref="home" class="col-lg-1 col-md-2 col-sm-2 col-xs-2 close-btn">
+            <i class="glyphicon glyphicon-remove "></i>
+          </div>
+          <div class="col-lg-11 col-md-10 col-sm-9 col-xs-9">{{tabName}}</div>
+
+        </div>
+
+
+        <div class="row event-page-content">
+          <div class="">
+
+            <div class="tab-content">
+
+              <!-- basics tab -->
+              <div role="tabpanel" class="tab-pane active tab-pan0" >
+                <div class="form-group">
+                  <div class="alert alert-warning" role="alert" ng-show="showItV === true"><span class="glyphicon glyphicon-exclamation-sign"></span>{{name.length<5?" Enter atleast 5 characters for event name":" Please select best category for your event."}}</div>
+                  <label for="eventName">Name your event</label>
+                  <input type="text" autofocus id="eventName" ng-model="name" class="form-control"/>
+                  <span class="form-control-info">This is the name that every one will see.</span>
+                </div>
+                <br/>
+                <div class="form-group">
+                  <label for="eventDesc">Add a description</label>
+                  <textarea id="eventDesc" ng-model="description" class="form-control" />
+                  <span class="form-control-info">Small description of this event.</span>
+                </div>
+                <br/>
+
+                <div id="eventDisplayPic" class="form-group">
+                  <label >Event Display Image</label><br/>
+                  <file-upload id="fu1" url="/api/events/create/upload" alias="eventDisplayPic" filters="|jpg|png|jpeg|bmp|" savedpath="eventDisplayPic">
+                  </file-upload>
+                </div>
+
+                <div class="form-group">
+
+                <!--<div class="alert alert-warning" role="alert" ng-show="selectedOpts==='' || showItV === true"><span class="glyphicon glyphicon-exclamation-sign"></span> Pick at least one category for your event.</div>-->
+                <label for="catSelect">Pick Category</label>
+                <cat-select id="catSelect" options="categories" catmodel="selectedOpts" callback="applyCatFilter"></cat-select>
+                <!--<cat-select options="categories" catmodel="selectedOpts"  ></cat-select>-->
+                <br/>
+                <div class="form-control-info">Select the best filter.</div>
+
+                </div>
+
+                <br/>
+              </div>
+
+
+              <!-- location tab -->
+              <div role="tabpanel" class="tab-pane tab-pan1 locationTab" id="ltab" >
+                <div class="form-group">
+                  <div class="alert alert-warning" role="alert" ng-show="showItV === true"><span class="glyphicon glyphicon-exclamation-sign"></span> Please provide the venue name (at least 5 character)</div>
+                  <label for="venueName">Venue Name</label>
+                  <input id="venueName" class="form-control" ng-model="venueName" />
+                  <!--<span class="form-control-info">Venue's actual name.</span>-->
+                </div>
+                <div id="autoLoc" class="auto-select-loc" ng-click="userCurrentLoc('userclick')">
+                <span style="padding: 10px 10px 5px 0px;background-color: #FFB854;    border: 1px solid;" >
+                  <i id="autoLocIcon" class="glyphicon glyphicon-map-marker auto-loc-icon"></i>Pick/Show current location</span>
+                </div>
+                <div class="input-group">
+                  <input ng-model="place" g-places-autocomplete class="form-control" type="text"
+                         placeholder="Search Place ...">
+                  <!--<input ng-model="placeSearchText" ng-keyup="searchPlace()" class="form-control" type="text" placeholder="Search Place ..." >-->
+                  <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+                <ui-gmap-google-map ng-class="authentication.user?'angular-google-map-container-logged-in':''" center="map.center" zoom="map.zoom" events="map.events" options="map.options" control="map.control">
+                  <div style="padding-top: 50px"></div>
+                  <ui-gmap-marker coords="marker.coords" options="marker.options" idkey="marker.id">
+                  </ui-gmap-marker>
+
+                </ui-gmap-google-map>
+                <br/>
+                <!--<div id="eventDisplayPic" class="form-group">-->
+                  <!--<label >Event Display Image</label><br/>-->
+                  <!--<file-upload id="fu1" url="/api/events/create/upload" alias="eventDisplayPic" filters="|jpg|png|jpeg|bmp|" savedpath="eventDisplayPic">-->
+                  <!--</file-upload>-->
+                <!--</div>-->
+
+
+              </div>
+
+              <div role="tabpanel" class="tab-pane tab-pan2 date-time-panel" >
+              <!--<div role="tabpanel" class="tab-pane tab-pan3 date-time-panel" >-->
+                <div class="alert alert-warning" role="alert" ng-show="eventStartDate==='' || eventEndDate==='' || showItV === true"><span class="glyphicon glyphicon-exclamation-sign"></span> Please validate dates for your event</div>
+                <!--<div class="form-group">-->
+                  <!--<label >Event Display Image</label><br/>-->
+                  <!--<file-upload url="/api/events/create/upload" alias="eventDisplayPic" filters="|jpg|png|jpeg|bmp|" savedpath="eventDisplayPic">-->
+                  <!--</file-upload>-->
+                <!--</div>-->
+
+                <label for="clockWidget">Event Start Time</label><br/>
+                <div class="dropdown" id="clockWidget">
+                  <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="eventStartDate">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                  </a><br/>
+                  <span class="form-control-info">When does the event start?</span>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="eventStartDate" data-before-render="beforeRender($view, $dates, $leftDate, $upDate, $rightDate)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                  </ul>
+                </div>
+                <br/><br/>
+                <label for="clockWidget2">Event End Time</label><br/><br/>
+                <div class="dropdown" id="clockWidget2">
+                  <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="eventEndDate">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                  </a><br/>
+                  <span class="form-control-info">When does the event end?</span>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="eventEndDate" data-before-render="beforeRenderED($view, $dates, $leftDate, $upDate, $rightDate)" data-datetimepicker-config="{ dropdownSelector: '#dropdown3'}"/>
+                  </ul>
+                  <br/>
+                  <br/>
+                  <span class="form-ntrol-info">* Submitting the event means that you agree to our disclaimers!</span>
+                  <br/>
+                </div>
+
+
+              </div>
+
+
+              <!--<div role="tabpanel" class="tab-pane tab-pan3 date-time-panel" >-->
+                <!--<div class="alert alert-warning" role="alert" ng-show="eventStartDate==='' || eventEndDate==='' || showItV === true"><span class="glyphicon glyphicon-exclamation-sign"></span> Please validate dates for your event</div>-->
+                <!--<label for="clockWidget">Event Start Time</label><br/>-->
+                <!--<div class="dropdown" id="clockWidget">-->
+                  <!--<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">-->
+                    <!--<div class="input-group">-->
+                      <!--<input type="text" class="form-control" data-ng-model="eventStartDate">-->
+                      <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
+                    <!--</div>-->
+                  <!--</a><br/>-->
+                  <!--<span class="form-control-info">When does the event start?</span>-->
+                  <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">-->
+                    <!--<datetimepicker data-ng-model="eventStartDate" data-before-render="beforeRender($view, $dates, $leftDate, $upDate, $rightDate)"data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>-->
+                  <!--</ul>-->
+                <!--</div>-->
+                <!--<br/><br/>-->
+                <!--<label for="clockWidget2">Event End Time</label><br/><br/>-->
+                <!--<div class="dropdown" id="clockWidget2">-->
+                  <!--<a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">-->
+                    <!--<div class="input-group">-->
+                      <!--<input type="text" class="form-control" data-ng-model="eventEndDate">-->
+                      <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
+                    <!--</div>-->
+                  <!--</a><br/>-->
+                  <!--<span class="form-control-info">When does the event end?</span>-->
+                  <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">-->
+                    <!--<datetimepicker data-ng-model="eventEndDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown3'}"/>-->
+                  <!--</ul>-->
+                <!--</div>-->
+              <!--</div>-->
+
+
+              <!--<div role="tabpanel" class="tab-pane tab-pan4 date-time-panel" >-->
+                <!--<div class="alert alert-warning" role="alert" ng-show="selectedOpts==='' || showItV === true"><span class="glyphicon glyphicon-exclamation-sign"></span> Pick at least one category for your event.</div>-->
+                <!--<label for="catSelect">Event Category</label><br/><br/>-->
+                <!--&lt;!&ndash;<cat-select id="catSelect" options="categories" catmodel="selectedOpts" callback="applyCatFilter"></cat-select>&ndash;&gt;-->
+                <!--&lt;!&ndash;<cat-select options="categories" catmodel="selectedOpts"  ></cat-select>&ndash;&gt;-->
+                <!--<br/>-->
+                <!--<div class="form-control-info">Select the best filter.</div>-->
+              <!--</div>-->
+
+              <!-- going tab -->
+              <!--<div role="tabpanel" class="tab-pane tab-pan3 going" id="end">-->
+                <!--<div class="alert alert-warning" role="alert" ng-show="finalValid === false"><span class="glyphicon glyphicon-exclamation-sign"></span> Missing some required fields! (please go back and check)</div>-->
+                <!--<div class="form-group checkbox-group">-->
+                  <!--<label for="eventPublic">Make it public?</label>-->
+                  <!--<input class="" type="checkbox" checked="checked" ng-model="public" id="eventPublic"/>-->
+                <!--</div>-->
+                <!--<span class="form-ntrol-info">* Checking the public box means that you agree to our disclaimers!</span>-->
+                <!--<br/><br/>-->
+                <!--<label><i class="glyphicon glyphicon-plus"></i> Friends</label>-->
+                <!--&lt;!&ndash;<div class="friends-container">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="container-fluid">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="row f-item">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">&ndash;&gt;-->
+                <!--&lt;!&ndash;<img src="/modules/events/client/img/user-ico.png" class="f-dp" />&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">&ndash;&gt;-->
+                <!--&lt;!&ndash;<h4>Test Name</h4>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="row f-item">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">&ndash;&gt;-->
+                <!--&lt;!&ndash;<img src="/modules/events/client/img/user-ico.png" class="f-dp" />&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">&ndash;&gt;-->
+                <!--&lt;!&ndash;<h4>Test Name</h4>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--<div class="">-->
+                  <!--<friends-search searcheditems="friends" callback="selectFriend"></friends-search>-->
+                <!--</div>-->
+                <!--<br/>-->
+                <!--<div class="friends-search-selected">-->
+                  <!--<ul>-->
+                    <!--<li ng-repeat="f in selectedFriends track by $index">-->
+                      <!--<img ng-src="{{f.profileImageURL}}"/>-->
+                      <!--<span><i class="glyphicon glyphicon-remove" ng-click="removeSelectedFriend(f)"></i></span>-->
+                      <!--<br/>-->
+                      <!--<span>{{f.firstName}}</span>-->
+                    <!--</li>-->
+                    <!--<li class="clearfix"></li>-->
+                  <!--</ul>-->
+                <!--</div>-->
+                <!--<br/><br/>-->
+              <!--</div>-->
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="event-page-footer">
+          <!--<br/>-->
+          <div class="footer-pages" id="footerPages">
+            <ul class="footer-pages-ul">
+              <!--<li><a id="tabLink0" ng-click="clickTab(0,'Basic')" href="#start" title="Basic" aria-controls="start"-->
+              <!--role="tab" data-toggle="tab">1</a></li>-->
+              <!--<li><a id="tabLink1" ng-click="clickTab(1,'Location')" href="#mid" title="Location" aria-controls="mid"-->
+              <!--role="tab" data-toggle="tab">2</a></li>-->
+              <!--<li><a id="tabLink2" ng-click="clickTab(2,'Who\'s Going?')" href="#end" title="Who's Going?"-->
+              <!--aria-controls="end" role="tab" data-toggle="tab">3</a></li>-->
+              <li>
+              <li>
+                <a href="javascript:void(0)" ng-click="clickTab(0,'prev')" ng-show="currentForm>0">
+                  <i class="glyphicon glyphicon-chevron-left"></i><span>Prev</span>
+                </a>
+                <a href="javascript:void(0)" ng-click="clickTab(2,'next')">
+                  <span ng-hide="currentForm===totalTabs-1">Next</span>
+                  <span ng-show="currentForm===totalTabs-1">Submit</span><i class="glyphicon glyphicon-chevron-right"></i>
+                </a>
+
+              </li>
+            </ul>
+
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <br>
+</div>

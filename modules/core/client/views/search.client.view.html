@@ -1,0 +1,97 @@
+<section ng-controller="SearchController" class="search-page container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <br/>
+            <div class="input-group">
+                <input ng-keyup="search()" placeholder="search ..." class="form-control search-field" type="text"
+                       ng-model="searchText">
+                <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+            </div>
+            <br/>
+            <div class="search-lists" ng-show="people.length + events.length + categories.length">
+                <ul class="nav nav-pills" >
+                    <li role="presentation" ng-click="showTab($event,1)" class="active"><a href="#">People</a></li>
+                    <li role="presentation" ng-click="showTab($event,2)"><a href="#">Events</a></li>
+                    <!--<li role="presentation" ng-click="showTab($event,3)"><a href="#">Categories</a></li>-->
+                </ul>
+                <div class="tab-content active" id="tab1">
+                    <ul>
+                        <li ng-if="authentication.user.email+''!==p.email+''" id="user_{{p._id}}" ng-repeat="p in people track by $index">
+                          <div class="custom-container">
+                            <div class="crow">
+                              <div class="col">
+                                <img class="profile-image-50" ng-src="{{p.profileImageURL}}" />
+                              </div>
+                              <div class="col" >
+                                {{p.displayName.length>14?p.displayName.substring(0, 14) + "..":p.displayName }}
+                              </div>
+                              <div class="col" ng-show="authentication.user!==undefined && authentication.user!==''">
+                                <a ng-if="!checkFriend(p)" class="btn btn-sm btn-success" ng-click="addFriend(p)">
+                                  <i  class="glyphicon glyphicon-plus"></i>
+                                  <img class="loader" width="32px" height="32px" src="/modules/core/client/img/loading_coco_large.gif">
+                                  Add Friend
+                                </a>
+                                <a ng-if="friendRequestSent(p,'0')" class="btn btn-sm btn-default" disabled="disabled">
+                                  <i  class="glyphicon glyphicon-ok"></i>
+                                  Sent Request
+                                </a>
+                                <a ng-if="friendRequestReceived(p,'0')" class="btn btn-sm btn-default" ng-click="accept(p)">
+                                  <i  class="glyphicon glyphicon-ok"></i>
+                                  <img class="loader" width="32px" height="32px" src="/modules/core/client/img/loading_coco_large.gif">
+                                  Accept
+                                </a>
+                                <a ng-if="friendRequestReceived(p,'0')" class="btn btn-sm btn-default" ng-click="decline(p)">
+                                  <i  class="glyphicon glyphicon-remove"></i>
+                                  <img class="loader"  width="32px" height="32px" src="/modules/core/client/img/loading_coco_large.gif">
+                                  Decline
+                                </a>
+                                <a ng-if="checkFriendWithStatus(p,'1')" class="btn btn-sm btn-default">
+                                  <i  class="glyphicon glyphicon-option-vertical"></i>
+                                </a>
+                              </div>
+                              <div class="col"></div>
+                            </div>
+                          </div>
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="tab2">
+                  <ul>
+                    <li ng-if="authentication.user.email+''!==p.email+''" id="user_{{p._id}}+1" ng-repeat="p in events track by $index" ng-click="showEvent(p)">
+                      <div class="custom-container">
+                        <div class="crow">
+                          <div class="col">
+                            <img class="profile-image-50" ng-src="{{p.eventDisplayPic!==''?p.eventDisplayPic:'./modules/core/client/img/helei-icon.png'}}" />
+                          </div>
+                          <div class="col event-name">
+                            {{p.name.length>14?p.name.substring(0, 14) + "..":p.name }}
+                          </div>
+                          <div class="col" ng-show="authentication.user!==undefined && authentication.user!==''">
+                            <a class="" style="    font-size: 12px;">
+                              <i  class="glyphicon glyphicon-time"></i>
+                              <img class="loader" width="32px" height="32px" src="/modules/core/client/img/loading_coco_large.gif">
+                              {{p.eventStartDate === undefined? "Not Available":(p.eventStartDate | parseDate1 ) }}
+                            </a>
+                          </div>
+                          <div class="col"></div>
+
+                        </div>
+                      </div>
+
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-content" id="tab3">
+                    <ul>
+                        <li >user.firstName.substriuser.firstName.substri
+                            {{p.firstName}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div ng-show="noResult" class="alert alert-warning">No Results!</div>
+
+        </div>
+    </div>
+</section>

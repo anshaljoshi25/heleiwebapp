@@ -1,0 +1,27 @@
+  <div ng-controller="CategoryEditController">
+    <div class="col-lg-6 col-lg-offset-3">
+      <div  >
+        <div class="form-group">
+          <label for="catname">Category Name</label>
+          <input type="text" class="form-control" id="catname" ng-model="category.name" required >
+        </div>
+
+        <div class="form-group">
+          <label >Category Image</label><br/>
+          <img ng-src="{{category.imgURL}}" class="img-circle img-responsive user-image"/>
+          <file-upload url="/api/categories/upload" alias="categoryDisplayPic" filters="|jpg|png|jpeg|bmp|" savedpath="categoryPic">
+          </file-upload><br/>
+          <label >Category Map Marker Image</label><br/>
+          <img ng-src="{{category.markerImgURL}}" class="img-circle img-responsive user-image"/>
+          <file-upload url="/api/categories/upload" alias="categoryDisplayPic" filters="|jpg|png|jpeg|bmp|" savedpath="markerPic">
+          </file-upload>
+          <br/>
+        </div>
+        <!--<div class="form-group">-->
+        <!--<label for="exampleInputFile">Marker Image</label>-->
+        <!--<input type="file" id="exampleInputFile2">-->
+        <!--</div>-->
+        <button type="submit" class="btn btn-default" ng-click="updateCategory()" >Update</button>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,30 @@
+body {
+	background-color: #fafafa;
+	color: gray;
+}
+
+.header {
+	background-color: #F2C961;
+    text-align: center;
+    color:white;
+}
+
+.info {
+	text-align: center;
+	margin: 10px 0px;
+	font-size:28px;
+	color:tomato;
+}
+
+.spacer {
+	height: 50px;
+}
+
+.items {
+	/*background-color: #ccc;*/
+}
+
+.items > div {
+	text-align: center;
+	margin-bottom: 40px;
+}

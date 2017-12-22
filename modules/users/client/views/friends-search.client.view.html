@@ -1,0 +1,17 @@
+<section class="">
+  <input ng-keyup="search()" class="form-control" ng-model="searchText" placeholder="Search ..." />
+  <div id="fsSearchedItems" class="fs-searched-items" ng-show="fsFriends.length">
+    <ul class="fsul">
+      <li class="fsli" ng-repeat="f in fsFriends track by $index" ng-click="callback(f)">
+        <div class="fslidp">
+          <img ng-src="{{f.profileImageURL}}" />
+        </div>
+        <div class="fslicontent">
+          {{f.firstName}}
+        </div>
+        <div class="fsliactions"></div>
+        <div class="clearfix"></div>
+      </li>
+    </ul>
+  </div>
+</section>

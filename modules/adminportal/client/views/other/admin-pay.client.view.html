@@ -1,0 +1,54 @@
+<section>
+  <div ng-controller="adminPayController">
+
+    <h2 class="ad-page-heading">Pay</h2>
+
+    <div class="row inbox-group-page-content">
+      <div class="group-create-form">
+        <div class="selectedFriends " style="background: rgba(162, 162, 162, 0.52);
+    border-radius: 14px;">
+            <user-search searcheditems="friends" callback="checkit"></user-search>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 ">
+      <!--piechart -->
+      <div class="pie-div">
+        <h3 style="text-align: center; color: #DC3912">Events details for {{profile.firstName+" "+profile.lastName }}</h3>
+        <div google-chart chart="chartObject" style="{{chartObject.cssStyle}}" option="option"></div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-6 ">
+      <!--active users table -->
+      <div class="active-user-div">
+        <h3 style="text-align: center; color: #DC3912">Ambassadors Invoice</h3>
+        <table st-table="rowCollection" class="table table-striped">
+          <thead>
+          <tr>
+            <th>profile picture</th>
+            <th>Details</th>
+            <th>TEC</th>
+            <th>PPE ($)</th>
+            <th>Total Amount</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-show="profile!==undefined">
+            <td><img src={{profile.profileImageURL}} class="img-circle img-responsive user-image"></td>
+            <td>{{profile.firstName+" "+profile.lastName }}<br/>{{" " +profile.email}}</td>
+            <td>{{profile.tec}}</td>
+            <td>{{profile.eventPrice}}</td>
+            <td>{{"$ "+(profile.tec < 1?"0":profile.tec * profile.eventPrice )}}</td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>

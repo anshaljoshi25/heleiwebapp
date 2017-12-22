@@ -1,0 +1,113 @@
+<section ng-controller="HomeController" >
+  <!-- all actions buttons layed over map -->
+  <div class="map-actions-box-top">
+    <ul>
+      <li ng-click="showFilter()">
+        <a ><i class="glyphicon glyphicon-filter"></i></a>
+      </li>
+    </ul>
+  </div>
+  <!-- all actions buttons layed over map -->
+  <div class="map-actions-box-bottom">
+    <ul>
+      <li>
+
+      </li>
+      <!--<li>-->
+      <!--<br/>-->
+      <!--<i class="glyphicon glyphicon-map-marker"></i>-->
+      <!--</li>-->
+      <li style="float:none" class="clearfix">
+
+      </li>
+    </ul>
+  </div>
+  <div class="list-drawer">
+    <div class="container">
+      <div class="row">
+        <div  class="col-lg-9 col-md-9 col-sm-8 col-xs-8 ld-heading" >
+          <span class="clear-dir" ng-show="showClearDir" ng-click="clearEventDirections()" ng-click="showListMode()">
+            Exact Distance : {{currentDirMiles}}<br/>
+            click here to clear directions
+          </span>
+          <span id="eventsListId"  class="heading" ng-hide="listMode" ng-click="showListMode()"><i ng-hide="listMode" class="glyphicon glyphicon-th-list"></i> Events List</span>
+          <span ng-show="listMode"  class="slide-down" ng-click="showListMode()" >
+            <i  class="glyphicon glyphicon-remove list-close-btn"></i>
+          </span>
+          <span ng-show="listMode"><search-field ng-model="searchText"></search-field></span>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 ld-actions">
+          <a  ng-click="showHideCircle()" class="locate-me-btn"><i class="glyphicon glyphicon-record"></i>
+          </a>
+          <a  ng-click="showMyLocation()" class="locate-me-btn"><i class="glyphicon glyphicon-map-marker"></i>
+          </a>
+        </div>
+      </div>
+      <div class="row list-container" ng-show="listMode" >
+        <ul>
+          <li ng-repeat="e in events | filter:{name:searchText} track by $index">
+            <div ui-sref="events.show({eid:e._id})" class="pull-left">
+              <img class="img-responsive" ng-src="{{e.eventDisplayPic !== ''?(e.eventDisplayPic + '_64x64'):'./modules/core/client/img/helei-icon.png'}}" /></div>
+            <div ui-sref="events.show({eid:e._id})" class="pull-left li-content">
+              <div class="name">{{e.name.length>10?e.name.substring(0,10)+'...':e.name}}</div>
+              <div class="info">
+
+                -starts {{getJustDate(e.eventStartDate).getTime()===todayDate.getTime()?'today':getJustDate(e.eventStartDate).getTime()===tomorrowDate.getTime()?'tomorrow':(e.eventStartDate | toSec | date:'dd MMM, yyyy')}} @ {{e.eventStartDate | toSec | date:'hh:mm a'}}
+
+              </div>
+            </div>
+            <div class="pull-right li-actions">
+              <span>~ {{(localDistance(e.location)+'').substring(0,4)}} mi</span>
+              <img ng-src="{{e.category.imgURL}}"  width="40px" height="40px" />
+              <a ng-click="locateEventOnMap(e.location)">
+                <img width="40px" height="40px" src="./modules/events/client/img/map_ico.png" />
+              </a>
+              <a ng-click="showEventDirections(e)">
+                <img width="40px" height="40px" src="./modules/core/client/img/directions_ico_64.png" />
+              </a>
+            </div>
+            <div class="clearfix"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="filters-menu" ng-show="showFilters">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+         <!--  <span class="pull-right" ng-click="showFilter()"><i class="glyphicon glyphicon-remove"></i></span> -->
+         <h3>Filters</h3>
+          <div class="close-btn-filter " ng-click="hideFilter()">
+            <i  class="glyphicon glyphicon-remove "></i>
+          </div>
+         <hr/>
+         <h4>Show events for next <span>{{fDays}} Days </span></h4>
+         <rzslider rz-slider-options='daysSliderOptions' rz-slider-model='fDays'></rzslider>
+         <h4>Within the area of <span>{{radiusValMiles}} Miles </span></h4>
+         <rzslider rz-slider-options='radSliderOptions' rz-slider-model='radiusVal'></rzslider>
+         <h4>Under {{selectedOpts.length}} selected categories</h4>
+         <cat-select options="categories" catmodel="selectedOpts" multiselect="true" callback="applyCatFilter"></cat-select>
+         <br/>
+         <div class="btn-holder pull-right">
+          <a class="btn  btn-orange" href="javascript:void(0);" ng-click="clearAllFilters()"><i class="glyphicon glyphicon-remove"></i> RESET</a>
+          <a class="btn  btn-blue" href="javascript:void(0);" ng-click="applyAllFilters()"><i class="glyphicon glyphicon-floppy-disk"></i> APPLY</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="mapContainer">
+  <ui-gmap-google-map disabledefaultio="true" ng-class="authentication.user?'angular-google-map-container-logged-in':''" center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control" events="map.events">
+  <div style="padding-top: 50px"></div>
+  <ui-gmap-markers models="map.markers" coords="'self'" options="'options'" isLabel='true'>
+  <ui-gmap-windows models = "map.markers" coords="'self'" options="infoWindowOptions" show="show">
+</ui-gmap-windows>
+</ui-gmap-markers>
+</ui-gmap-google-map>
+</div>
+
+</section>

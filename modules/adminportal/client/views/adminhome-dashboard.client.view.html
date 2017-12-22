@@ -1,0 +1,155 @@
+<section  ng-controller="AdminDashboardController">
+  <div class="row card-holder" >
+    <h3 class="dash-head">Dashboard Statistics overview</h3>
+    <div class="col-lg-12 ">
+      <div class="col-lg-3 colg-md-4 col-sm-6">
+        <div class="panel panel-primary card-green">
+          <div class="panel-body">
+            <span><i class="glyphicon glyphicon-shopping-cart panel-icon "></i> </span>
+            <p class="panel-text">{{newEvents}}<br>New Events Posted!</p>
+          </div>
+          <div ui-sref="adminportal.manageprint" class="panel-footer">View Details<i
+            class="glyphicon glyphicon-arrow-right panel-footer-icon"></i></div>
+        </div>
+      </div>
+      <div class="col-lg-3 colg-md-4 col-sm-6 ">
+        <div class="panel panel-primary card-orange">
+          <div class="panel-body">
+            <span><i class="glyphicon glyphicon-flag panel-icon "></i> </span>
+            <p class="panel-text">{{newRegistrations}}<br>User Registrations!</p>
+          </div>
+          <div ui-sref="adminportal.manageprint" class="panel-footer">View Details<i
+            class="glyphicon glyphicon-arrow-right panel-footer-icon"></i></div>
+        </div>
+      </div>
+      <div class="col-lg-3 colg-md-4 col-sm-6">
+        <div class="panel panel-primary card-blue">
+          <div class="panel-body">
+            <span><i class="glyphicon glyphicon-stats panel-icon "></i> </span>
+            <p class="panel-text">{{newOrders}}<br>New Orders!</p>
+          </div>
+          <div ui-sref="adminportal.manageprint" class="panel-footer">View Details<i
+            class="glyphicon glyphicon-arrow-right panel-footer-icon"></i></div>
+        </div>
+      </div>
+      <div class="col-lg-3 colg-md-4 col-sm-6">
+        <div class="panel panel-primary card-purple">
+          <div class="panel-body">
+            <span><i class="glyphicon glyphicon-info-sign panel-icon "></i> </span>
+            <p class="panel-text">{{newFeedback}}<br>New Feedbacks!</p>
+          </div>
+          <div ui-sref="adminportal.manageprint" class="panel-footer">View Details<i
+            class="glyphicon glyphicon-arrow-right panel-footer-icon"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3 class="dash-head">Popular Categories</h3>
+    <div class="col-lg-12">
+      <div class="pie-div">
+        <div google-chart chart="chartObject" style="{{chartObject.cssStyle}}" option="option"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <!--// &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;previous-->
+
+
+  <!-- main dashboard updates,overview,messages etc -->
+  <!-- heading -->
+  <!--<h2 style="text-align: center">Dashboard</h2>-->
+  <!--<div class="container-fluid">-->
+
+  <!--<div class="col-lg-6 ">-->
+  <!--&lt;!&ndash;piechart &ndash;&gt;-->
+  <!--<div class="pie-div">-->
+  <!--<h3 style="text-align: center; color: #DC3912">Popular Categories</h3>-->
+  <!--<div google-chart chart="chartObject" style="{{chartObject.cssStyle}}" option="option"></div>-->
+  <!--</div>-->
+
+  <!--</div>-->
+
+  <!--<div class="col-lg-6 " >-->
+  <!--&lt;!&ndash;active users table &ndash;&gt;-->
+  <!--<div ng-controller="AdminActiveUser" class="active-user-div">-->
+  <!--<h3 style="text-align: center; color: #DC3912">Active users</h3>-->
+  <!--<table st-table="rowCollection" class="table table-striped">-->
+  <!--<thead>-->
+  <!--<tr>-->
+  <!--<th>profile picture</th>-->
+  <!--<th>first name</th>-->
+  <!--<th>last name</th>-->
+  <!--<th>Reputation</th>-->
+  <!--<th>Active</th>-->
+
+  <!--</tr>-->
+  <!--</thead>-->
+  <!--<tbody>-->
+  <!--<tr ng-repeat="p in profile" ui-sref="adminportal.activeUsers({uid: p._id})">-->
+  <!--<td><img src={{p.profileImageURL}} class="img-circle img-responsive user-image"></td>-->
+  <!--<td>{{p.firstName}}</td>-->
+  <!--<td>{{p.lastName}}</td>-->
+  <!--<td>Gold</td>-->
+  <!--<td>not active</td>-->
+
+  <!--</tr>-->
+  <!--</tbody>-->
+  <!--</table>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <!--</div>-->
+
+  <!--</div>-->
+  <!--</div>-->
+
+
+  <!--online users and most populer events -->
+  <!--<div class="row bottom-sec">-->
+  <!--<div class="col-lg-12">-->
+  <!--<div class="col-lg-6 ">-->
+  <!--&lt;!&ndash;Number of online users-&#45;&#45;&ndash;&gt;-->
+  <!--<div ng-controller="UsersStatus">-->
+  <!--<h3 style="text-align: center; color: #DC3912">User Status</h3>-->
+  <!--<div google-chart chart="chartObject2" style="{{chartObject2.cssStyle2}}" option="option"></div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="col-lg-6 ">-->
+  <!--&lt;!&ndash;&#45;&#45;&#45;&#45;list events&#45;&#45;&#45;&#45;&ndash;&gt;-->
+  <!--<div ng-controller="AdminListEvents" class="user-status-div">-->
+  <!--<h3 style="text-align: center; color: #DC3912">Popular Events</h3>-->
+  <!--<table st-table="rowCollection" class="table table-striped">-->
+  <!--<thead>-->
+  <!--<tr>-->
+  <!--<th>Event name</th>-->
+  <!--<th>Event Categorie</th>-->
+  <!--<th>Event date</th>-->
+  <!--<th>Going</th>-->
+  <!--<th>Attended</th>-->
+
+
+  <!--</tr>-->
+  <!--</thead>-->
+  <!--<tbody>-->
+  <!--<tr ng-repeat="e in events" ui-sref="adminportal.listEvents({uid: p._id})">-->
+  <!--<td>{{e.name}}</td>-->
+  <!--<td>{{e.category.name}}</td>-->
+  <!--<td>{{e.eventDate | toSec | date:'dd-MMM-yyyy'}}</td>-->
+  <!--<td>10</td>-->
+  <!--<td>6</td>-->
+
+  <!--</tr>-->
+  <!--</tbody>-->
+  <!--</table>-->
+  <!--</div>-->
+
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+</section>

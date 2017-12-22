@@ -1,0 +1,45 @@
+<div >
+  <div ng-if="p.email!==me.email && usersArray.length >0" class="row inbox-list-user " ng-repeat=" p in usersArray |  orderBy : '-lastMsgSentAt'  track by $index" >
+
+    <div class="col-lg-3 col-sm-3 col-xs-3 col-md-3" ng-click="callback(p)">
+      <div class ="user-image ">
+        <img src={{p.profileImageURL}} alt="na aayi" class="img-circle img-responsive ul-cust-img">
+      </div>
+    </div>
+
+    <div class="col-lg-7 col-sm-7 col-xs-7 col-md-7" ng-click="callback(p)">
+      <div class="user-data">
+        <div class="user-data-center">
+          <div>
+            <h3>{{p.firstName + " " + p.lastName}}</h3>
+            <p >{{p.rmsg}}</p>
+            <p style="font-weight: lighter;">{{(p.lastMsgSentAt !== "" && p.lastMsgSentAt !== undefined)?"Received at: " + (p.lastMsgSentAt | parseDate):"Start conversation.." }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 inbox-options">
+      <div class="alulactions">
+        <div class="dropdown pull-right">
+              <span class="dropdown-toggle inbox-drop-down-menu" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                <i class="glyphicon  glyphicon-option-vertical"></i>
+              </span>
+
+          <!--<ul class="dropdown-menu" aria-labelledby="dropdownMenu3" role="actions">-->
+            <!--<li >-->
+              <!--<a><i class="glyphicon glyphicon-remove" ng-click="deletChat(p)"></i> Delete Chat</a>-->
+            <!--</li>-->
+            <!--<li>-->
+              <!--<a><i class="glyphicon glyphicon-thumbs-down" ng-click="blockProfile(p)"></i> Block</a>-->
+            <!--</li>-->
+          <!--</ul>-->
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

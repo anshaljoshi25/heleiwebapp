@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <base href="/">
+  <title>Helei App Download</title>
+  <meta name="description" content="{{description}}">
+  <meta name="fragment" content="!">
+
+  <!-- Apple META -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Facebook META -->
+  <meta property="fb:app_id" content="{{facebookAppId}}">
+  <meta property="og:site_name" content="{{title}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="{{url}}">
+  <meta property="og:image" content="{{logo}}">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter META -->
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:url" content="{{url}}">
+  <meta name="twitter:image" content="{{logo}}">
+
+  <!-- Fav Icon -->
+  <link href="{{favicon}}" rel="shortcut icon" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="modules/core/client/img/icon_57x57.png" />
+  <link rel="apple-touch-icon" sizes="57x57" href="modules/core/client/img/icon_72x72.png" />
+  <link rel="apple-touch-icon" sizes="57x57" href="modules/core/client/img/icon_114x114.png" />
+  <link rel="apple-touch-icon" sizes="57x57" href="modules/core/client/img/icon_144x144.png" />
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap-theme.css" />
+  <link rel="stylesheet" href="/modules/core/client/css/version2.css" />
+ 
+  <script src="//load.sumome.com/" data-sumo-site-id="369ddb7ecf84566d187570fa5b642de4de72d73f2278a9351a2c82ab3b2b2570" async="async"></script>
+</head>
+
+<body class="ng-cloak">
+<!-- GPS check block -->
+
+<!--facebook comment plugin -- change your APP id -->
+<div id="fb-root"></div>
+<!-- <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=202155666826440";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script>
+  var mode = '{{env}}';
+  if(mode==='production') {
+
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-76150382-1', 'auto');
+     ga('send', 'pageview');
+
+
+  }
+</script> -->
+
+  <section class="content">
+    <section class="container-fluid container-custom">
+      <div class="row header" >
+        <div class="col-lg-12">
+          <h2>Welcome to Helei</h2>
+        </div>
+      </div>
+      <div class="row spacer hidden-sm hidden-xs"></div>
+      <div class="row info">
+        <div class="col-lg-12">
+          <h1>Hi there!</h1> Wanna find out what's happening around you? Please install helei app for your device:
+        </div>
+      </div>
+      <div class="row items">
+        <div class="col-lg-6 col-md-6">
+          <img src="/modules/core/client/img/playstore_icon.png" /><br/>
+          <a href="https://play.google.com/store/apps/details?id=com.ionicframework.heleimat980895"><h3>ANDROID</h3></a>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <img src="/modules/core/client/img/apple_icon.png" /><br/>
+          <h3>IOS</h3><br/><span>Comming Soon ... </span>
+        </div>
+      </div>
+    </section>
+  </section>
+
+</body>
+
+</html>

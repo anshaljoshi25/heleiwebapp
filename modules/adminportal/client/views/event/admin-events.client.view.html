@@ -1,0 +1,110 @@
+<section ng-controller="AdminEventController">
+  <h2 class="ad-page-heading">Events</h2>
+  <div class="options">
+    <div class="options-bar" class="btn-group">
+      <a type="button" class="btn">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+      <a type="button" class="btn ">
+        <i class="glyphicon glyphicon-heart"></i>
+      </a>
+      <a type="button" class="btn ">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+      <input type="text" placeholder="Search" ng-model="query" />
+    </div>
+
+  </div>
+  <div class="alert alert-warning" ng-show="error.length">{{error}}</div>
+  <div class="alert alert-success" ng-show="success.length">{{success}}</div>
+
+  <div id="dealsBox" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Deals</h4>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-warning" ng-show="error.length">{{error}}</div>
+          <div class="alert alert-success" ng-show="success.length">{{success}}</div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <input class="form-control input-small" type="text" placeholder="Attach Deal ..." ng-model="dealQuery" />
+                <ul class="list-group">
+                  <li ng-repeat="d in deals | filter:dealQuery track by $index" ng-click="attachDealToEvent(d)" class="list-group-item">{{d.name}}<i class="glyphicon glyphicon-chevron-right"></i></li>
+                </ul>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <label>Attached Deals:</label>
+                <ul class="list-group">
+                  <li ng-repeat="d in events[selectedIndex].deals" class="list-group-item">{{d.name}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <!-- <button ng-click="create()" type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="col-lg  -12">
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <!-- <th>Created By</th> -->
+            <th>Category</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="e in events | filter:query track by $index">
+            <td>{{e.name}}</td>
+            <!-- <td>{{e.creator.name}}</td> -->
+            <td>{{e.category.name}}</td>
+            <td>{{e.eventStartDate | toSec | date:'dd MMM, yyyy'}} @ {{e.eventStartDate | toSec | date:'hh:mm a'}}</td>
+            <td>{{e.eventEndDate | toSec | date:'dd MMM, yyyy'}}  @ {{e.eventEndDate | toSec | date:'hh:mm a'}}</td>
+            <td>
+              <a href="javascript:void(0);" ng-click="showDeals($index)" data-toggle="modal" data-target="#dealsBox">
+                <i class="glyphicon glyphicon-star"></i> Deals
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--<div class="row ">-->
+
+  <!--<div class="col-md-6 col-lg-offset-3 ">-->
+  <!--<div class="col-md-6 admin-browse-all">-->
+  <!--&lt;!&ndash;-&#45;&#45;browse all&ndash;&gt;-->
+  <!--<a class="admin-browse-link" ui-sref="adminportal.events.browse-events" href="/adminportal/events/browse-event">-->
+  <!--Browse All</a>-->
+  <!--</div>-->
+  <!--<div class="col-md-6 admin-add-new">-->
+  <!--&lt;!&ndash;add new-&ndash;&gt;-->
+  <!--<a ui-sref="adminportal.events.create-events" href="/adminportal/events/create-events" class="admin-new-link">-->
+  <!--Add New</a>-->
+  <!--</div>-->
+  <!--</div>-->
+
+
+  <!--</div>-->
+  <!--<section>-->
+  <!--<ui-view>-->
+
+  <!--</ui-view>-->
+  <!--</section>-->
+</section>

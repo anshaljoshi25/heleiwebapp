@@ -1,0 +1,18 @@
+<section class="row custom-row" ng-controller="AuthenticationController" >
+  <div ng-hide="$state.current.name==='authentication.signup'">
+  <h3 style="margin-bottom: 30px;" class="col-md-12 text-center">Sign in using your social accounts</h3>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 text-center">
+        <a ng-click="callOauthProvider('/api/auth/facebook')" class="btn btn-lg btn-block fb-login-btn">Facebook</a>
+        <!--<img ng-click="callOauthProvider('/api/auth/twitter')" ng-src="/modules/users/client/img/buttons/twitter.png">-->
+        <a ng-click="callOauthProvider('/api/auth/google')" class="btn btn-lg btn-block gplus-login-btn">Google+</a>
+        <!--<img ng-click="callOauthProvider('/api/auth/linkedin')" ng-src="/modules/users/client/img/buttons/linkedin.png">-->
+        <!--<img ng-click="callOauthProvider('/api/auth/github')" ng-src="/modules/users/client/img/buttons/github.png">-->
+        <!--<img ng-click="callOauthProvider('/api/auth/paypal')"  ng-src="/modules/users/client/img/buttons/paypal.png">-->
+      </div>
+    </div>
+  </div>
+  </div>
+  <div ui-view></div>
+</section>

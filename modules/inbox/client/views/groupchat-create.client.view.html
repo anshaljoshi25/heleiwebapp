@@ -1,0 +1,84 @@
+<div ng-controller="GroupCreateController" class="container create-events-bg subpage">
+  <div class="subpage-wrapper container">
+    <div class="row">
+      <div class=" col-lg-6 col-lg-offset-3">
+        <div class="row subpage-page-heading">
+
+          <div class="col-lg-1 col-md-2 col-sm-3 col-xs-3 close-btn">
+            <div ui-sref="inbox.list">
+            <i class="glyphicon glyphicon-chevron-left "></i>
+            </div>
+          </div>
+          <div class="col-lg-11 col-md-10 col-sm-9 col-xs-9">Create Group</div>
+        </div>
+
+        <div class="row inbox-group-page-content">
+          <div class="group-create-form">
+            <div class="alert alert-warning" role="alert" ng-show="showNameWarning===true"><span class="glyphicon glyphicon-exclamation-sign"></span> Please provide the group name (at least 5 character) then add friends</div>
+          <label>Name your group</label>
+          <input type="text" class="form-control" placeholder="Type group name here.." ng-model="groupName" maxlength="20">
+
+          <br/>
+          <label>Add group participants</label>
+          <input id="fsearchbar" watcher type="text" class="form-control" placeholder="Type name of your friend.." ng-model="searchfriend" maxlength="50"
+            ng-options="">
+
+            <ul class="user-list-dropdown " ng-show="userList.length" >
+              <li  ng-repeat="user in userList track by $index" ng-if="user.email !== me.email">
+                  <!--{{user.firstName}} {{user.lastName}}-->
+                  <div class="row search-row">
+                  <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2" ng-click="selectfriend(user)" >
+                    <div class ="search-user-image ">
+                      <img src={{user.profileImageURL}} alt="na aayi" class="img-circle img-responsive ul-cust-img" >
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-sm-8 col-xs-8 col-md-8" ng-click="selectfriend(user)"  >
+                      <div class="search-user-data">
+                        <div>
+                          <h3>{{user.firstName + " " + user.lastName}}</h3>
+
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2 " ng-click="removeuser(user)">
+                    <i class="glyphicon glyphicon-remove inbox-list-sideoption pull-left search-user-remove"></i>
+                  </div>
+                  </div>
+              </li>
+            </ul>
+
+            <label>{{addFriend}}</label>
+          </div>
+
+          <div class="selectedFriends ">
+            <label>Added friends:</label>
+            <div class="selected-user-list" ng-show="selectedfriends.length" >
+
+              <!--<div ng-repeat="suser in selectedfriends track by $index">-->
+
+                <!--<img src={{suser.profileImageURL}} alt="na aayi" class="img-circle img-responsive selected-user-image pull-left ">-->
+
+              <!--</div>-->
+
+              <icon-list mode="grid"  local-search="true" search-field="firstName"  list="selectedfriends" content="firstName"
+                         icon="profileImageURL"  repeatlimit="4" click-func="showFriendProfile"></icon-list>
+
+             </div>
+
+          </div>
+          <div class="group-submit-btn">
+            <a href="javascript:void(0)"ng-click="creategroup()">
+            <span>Submit</span><i class="glyphicon glyphicon-chevron-right"></i>
+              </a>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <br>
+</div>

@@ -1,0 +1,98 @@
+<section class="row" ng-controller="ManageAcceptedController">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="row">
+      <div class="filters-box" ng-show="accepted.length">
+        <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7">
+          <!--<div class="input-group ">-->
+          <input class="form-control search-field" ng-model="searchText" placeholder="Search ..."/>
+          <!--</div>-->
+        </div>
+
+        <div class="dropdown pull-right">
+          <div class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false">
+            Sort <i class="glyphicon glyphicon-chevron-down"></i>
+          </div>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" role="sort">
+            <li><a ng-click="sortBy('eventStartDate')"><i class="glyphicon glyphicon-chevron-up"></i> Event's Date</a></
+            li>
+            <li><a ng-click="sortBy('-eventStartDate')"><i class="glyphicon glyphicon-chevron-down"></i> Event's Date</a>
+            </li>
+            <li><a ng-click="sortBy('going.length')"><i class="glyphicon glyphicon-chevron-up"></i> Going</a></li>
+            <li><a ng-click="sortBy('-going.length')"><i class="glyphicon glyphicon-chevron-down"></i> Going</a></li>
+          </ul>
+        </div>
+
+
+        <!--<div class="dropdown pull-right">-->
+          <!--<div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"-->
+               <!--aria-expanded="false">-->
+            <!--Filter <i class="glyphicon glyphicon-filter"></i>-->
+          <!--</div>-->
+          <!--<ul class="dropdown-menu pull-right" aria-labelledby="dropdownMenu1" role="filter">-->
+            <!--<li><a href="#">Category</a></li>-->
+            <!--<li><a href="#">Date</a></li>-->
+          <!--</ul>-->
+        <!--</div>-->
+
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <br>
+    <div class="accepted-list" ng-show="accepted.length">
+      <ul>
+        <li ng-repeat="eaccepted in accepted | filter:searchText |  orderBy:currentSort track by $index" class="alulli">
+          <div class="aluldp">
+            <img
+              ng-src="{{eaccepted.eventDisplayPic!==undefined?eaccepted.eventDisplayPic+'_64x64':eaccepted.category.imgURL}}"/>
+          </div>
+          <div class="alulcontent">
+            <span class="alulname" ui-sref="events.show({eid:eaccepted._id})">{{eaccepted.name | uppercase}}</span>
+            <span class="aluldesc">{{eaccepted.description}}</span>
+            <span class="alulsummary">
+              <span class="alulsico">
+                <i class="glyphicon glyphicon-calendar"></i> {{eaccepted.eventStartDate | toSec | date:'dd-MMM-yyyy'}}
+              </span>
+              <span class="alulsico">
+                <i class="glyphicon glyphicon-time"></i> {{eaccepted.eventStartDate | toSec | date:'hh:mm'}}
+              </span>
+              <span class="alulsico">
+                <i class="glyphicon glyphicon-user"></i> {{eaccepted.going.length}}
+              </span>
+              <span ng-show="eaccepted.creator !== undefined && eaccepted.creator.email ===  me.email" ng-click="editEvent(eaccepted)">
+               <a style="color:#333333;"><i class="glyphicon glyphicon-edit"></i></a>
+              </span>
+            </span>
+          </div>
+          <div class="alulactions">
+            <div class="dropdown pull-right">
+              <span class="dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                <i class="glyphicon glyphicon-option-horizontal"></i>
+              </span>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu3" role="actions">
+                <li ng-click="declineEvent(eaccepted)">
+                  <a><i class="glyphicon glyphicon-remove"></i> Not Going</a>
+                </li>
+                <li ng-show="eaccepted.creator !== undefined && eaccepted.creator.email ===  me.email" ng-click="editEvent(eaccepted)">
+                  <a><i class="glyphicon glyphicon-edit"></i> Edit Event</a>
+                </li>
+                <li ng-show="eaccepted.creator !== undefined && eaccepted.creator.email ===  me.email" ng-click="inviteFrens(eaccepted)">
+                  <a><i class="glyphicon glyphicon-plus"></i> Invite</a>
+                </li>
+                <!--<li>-->
+                  <!--<a><i class="glyphicon glyphicon-comment"></i> Event Inbox</a>-->
+                <!--</li>-->
+              </ul>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="alert alert-warning" ng-hide="accepted.length">
+      No events subscribed yet!
+    </div>
+  </div>
+</section>

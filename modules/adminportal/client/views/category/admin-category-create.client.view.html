@@ -1,0 +1,27 @@
+<section>
+  <div ng-controller="CategoryCreateController">
+    <div class="col-lg-6 col-lg-offset-3">
+    <form>
+      <div class="form-group">
+        <label for="exampleInputName2">Category Name</label>
+        <input type="text" class="form-control-custom" id="exampleInputName2" ng-model="name" placeholder="name of category">
+      </div>
+
+      <div class="form-group">
+        <label >Category Image</label><br/>
+        <file-upload url="/api/categories/upload" alias="categoryDisplayPic" filters="|jpg|png|jpeg|bmp|" savedpath="categoryPic">
+        </file-upload><br/>
+        <label >Category Map Marker Image</label><br/>
+        <file-upload url="/api/categories/upload" alias="categoryDisplayPic" filters="|jpg|png|jpeg|bmp|" savedpath="markerPic">
+        </file-upload>
+        <br/>
+        </div>
+      <!--<div class="form-group">-->
+        <!--<label for="exampleInputFile">Marker Image</label>-->
+        <!--<input type="file" id="exampleInputFile2">-->
+      <!--</div>-->
+      <button type="submit" class="btn btn-default" ng-click="submitForm()">Submit</button>
+    </form>
+    </div>
+  </div>
+</section>

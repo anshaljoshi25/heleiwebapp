@@ -1,0 +1,108 @@
+<div ng-controller="EventsShowController" class="container show-events-bg subpage">
+  <div class="subpage-wrapper container">
+    <div class="row">
+
+      <div class=" col-lg-6 col-lg-offset-3 show-events-heading">
+        <!-- <div class="seh-map-cover">
+          &nbsp;
+        </div> -->
+        <div class="close-btn-event" ng-click="goBack()">
+          <i  class="glyphicon glyphicon-remove "></i>
+        </div>
+        <!-- <div class="subpage-page-heading "> -->
+        <img class="displayPic" ng-src="{{event.eventDisplayPic !== ''?(event.eventDisplayPic):'./modules/core/client/img/helei-test.png'}}" />
+
+        <div class="pull-right actions-holder">
+          <!-- action buttons -->
+
+          <button type="button" ng-hide="showLoyaltyBtn" ng-click="get50Points()" class="btn btn-small  btn-white" >Get 50 points</button>
+          <button type="button" ng-show="qrBtn" class="btn btn-small  btn-white" data-toggle="modal" data-target="#eventQr">Request QR</button>
+          <a ng-click="attendEvent(event)" class="btn btn-small btn-white"><i ng-show="subscribedByMe===false" class="glyphicon glyphicon-ok"></i><i ng-show="subscribedByMe===true" class="glyphicon glyphicon-remove"></i> {{subscribedByMe===true?'Unattend':'Attend'}}</a>
+          <a ui-sref="events.edit({eid:eid}  )" class="btn btn-white btn-small" ng-show="event.creator.email===me.email">
+            <i class="glyphicon glyphicon-edit"></i></a>
+            <!--<span >-->
+              <!--<a target="_blank" href="https://www.google.com/maps/preview/@{{event.location.latitude}},{{event.location.longitude}},8z"><img width="33px" src="./modules/events/client/img/map_ico.png"></a>-->
+            <!--</span>-->
+          </div>
+          <!-- </div> -->
+          <!-- <br/> -->
+        <!-- <span class="seh-icon-holder"><img class="seh-icon" src="/modules/events/client/img/Walking.png"/> {{directions.distance.text}}</span><br/><br/>
+        <span class="seh-icon-holder"><img class="seh-icon" src="/modules/events/client/img/Car.png"/> {{directions.duration.text}}</span> -->
+
+        <div ng-mouseenter="showUploadImagesFn($event)" ng-mouseleave="showUploadImagesFn($event)" class="event-img-slider-wrapper">
+          <a data-toggle="modal" data-target="#imageUploadModal" ng-show="showUploadImages && subscribedByMe" class="btn btn-small btn-white upload-imgs"><i class="glyphicon glyphicon-upload"></i> Add Picture</a>
+
+          <div class="modal fade imageUploadModal" id="imageUploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Add Pictures</h4>
+                </div>
+                <div class="modal-body">
+                  <file-upload url="/api/events/create/upload" alias="eventDisplayPic" filters="|jpg|png|jpeg|bmp|" savedpath="newEventImage">
+                </div>
+                <div class="modal-footer">
+                  <button ng-click="clearImage()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button ng-click="saveImage()" type="button" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div id="eventSlider" class="event-img-slider">
+            <div ng-click="showFullImage(event.eventDisplayPic)" style="background-image: url({{event.eventDisplayPic}}_128x128)"></div>
+            <div ng-click="showFullImage(img.imgURL)" title="{{img.user.firstName}}"  ng-repeat="img in event.images" style="background-image: url({{img.imgURL}}_128x128)">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-lg-offset-3 show-events-content">
+
+        <div>
+          <div class="more-info-container" >
+            <h3 style="display: inline-block; font-weight: bold; color:#A4740D">{{event.name}}</h3> <a href="#commentsBox" >
+            <i class="glyphicon glyphicon-comment"></i> <span class="fb-comments-count" data-href="">0</span>
+          </a>
+
+          <div>
+            <b style="color:#A4740D">People Going : </b>
+            <a href="javascript:void(0);" ng-click="showGoing=!showGoing" >
+              <i class="glyphicon glyphicon-user"></i> {{event.going.length}}
+            </a>
+            <div ng-show="showGoing" class="sec-going-container">
+              <icon-list mode="grid"  local-search="true" search-field="firstName"  list="event.going" content="firstName" icon="profileImageURL"  repeatlimit="4" click-func="showUserProfile(obj)"></icon-list>
+            </div>
+            <br/>
+            <b style="color:#A4740D">Starts : </b>{{event.eventStartDate | toSec | date:'dd MMM, yyyy'}} @ {{event.eventStartDate | toSec | date:'hh:mm a'}}<br/>
+            <b style="color:#A4740D">Ends : </b>{{event.eventEndDate | toSec | date:'dd MMM, yyyy'}} @ {{event.eventEndDate | toSec | date:'hh:mm a'}}<br/>
+            <b style="color:#A4740D">Venue : </b>{{event.venueName}}<br/>
+            <b style="color:#A4740D">Location : </b>{{event.place.address_components[0].long_name}}<br/>
+            <b style="color:#A4740D">Description : </b>
+          </div>
+          <p>
+            <!-- <img ng-src="{{event.eventDisplayPic+'_128x128'}}" alt="event.name"><br/> -->
+            <span>"{{event.description}}"</span>
+          </p>
+          <a ng-hide="showMoreInfo" ng-click="showMoreInfoFn()" class="btn btn-block show-more-btn">
+            More <i class="glyphicon glyphicon-option-horizontal"></i>
+          </a>
+          <!--facebook comment plugin container -->
+          <div class="fb-comment-container" id="commentsBox">
+            <div id="fbb-plugin" class="fb-comments " data-href="" data-numposts="5" data-order-by="" style="width: 100%;background-color: whitesmoke;"></div>
+          </div>
+        </div>
+      </div>
+      <!-- <div ng-hide="moreInfo" class="col-lg-6 col-lg-offset-3 col-md-12 col-sm-12 xol-xs-12 se-load-btn"><br/>
+        <a ng-click="moreInfo=true" class="btn btn-block btn-default">Load More Info</a>
+      </div> -->
+
+
+    </div>
+  </div>
+  <br>
+</div>
+</div>

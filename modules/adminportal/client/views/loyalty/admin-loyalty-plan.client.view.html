@@ -1,0 +1,54 @@
+<section ng-controller="LoyaltyPlanController">
+  <h2 class="ad-page-heading">Loyalty Plans</h2>
+  <div class="options">
+    <div class="options-bar" class="btn-group">
+      <a type="button" class="btn" ng-click="addNew()">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+      <a type="button" class="btn ">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+    </div>
+    <div class="row ">
+
+      <div class="col-md-6 col-lg-offset-3 ">
+        <table st-table="rowCollection" class="table table-striped">
+          <thead>
+          <tr>
+            <td>Type</td>
+            <td>Points</td>
+            <td>Actions</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="lp in loyalties track by $index">
+            <td>
+              <input ng-model="lp.type" class="form-control-custom" ng-show="editMode==$index"/>
+              <span ng-hide="editMode==$index">{{lp.type}}</span>
+            </td>
+            <td>
+              <input ng-model="lp.points" class="form-control-custom" ng-show="editMode==$index"/>
+              <span ng-hide="editMode==$index">{{lp.points}}</span>
+            </td>
+            <td>
+              <i ng-hide="editMode==$index" class="glyphicon glyphicon-edit" ng-click="setEditMode($index)"></i>
+              <i ng-hide="editMode==$index" class="glyphicon glyphicon-remove" ng-click="delete($index)"></i>
+            <span ng-show="editMode==$index">
+              <a ng-click="save($index)" class="btn btn-orange btn-small">Save</a> <a ng-click="setEditMode(-1)"
+                                                                                      class="btn btn-orange btn-small">Cancel</a>
+            </span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <!--<a class="btn btn-small btn-orange" ng-click="addNew()">Add New</a>-->
+
+      </div>
+    </div>
+
+
+  </div>
+  <section>
+    <ui-view></ui-view>
+  </section>
+</section>

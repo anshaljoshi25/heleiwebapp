@@ -1,0 +1,18 @@
+<span>
+  <img id="fuLoader" class="file-uploader-loader" src="./modules/core/client/img/loaders/loader_transparent.gif" alt="loading ..."/>
+  <img ng-src="{{imageURL}}" class="file-uploader-img" ng-show="uploader.queue.length"/>
+  <span id="fuFile" class="btn btn-default btn-file"><i class="glyphicon glyphicon-upload"></i> Browse
+    <input type="file" class="" nv-file-select uploader="uploader"
+    ng-hide="uploader.queue.length"/>
+  </span>
+  <div id="buttonsHolder">
+    <button class="btn btn-sm btn-success file-uploader-btn" ng-click="upload()"
+    ng-show="!uploaded && uploader.queue.length>0">
+    <i class="glyphicon glyphicon-ok"></i>
+  </button>
+  <button class="btn btn-sm btn-success file-uploader-btn" ng-click="cancelUpload()"
+  ng-show="uploader.queue.length>0">
+  <i class="glyphicon glyphicon-remove"></i>
+</button>
+</div>
+</span>

@@ -1,0 +1,47 @@
+<section ng-controller="SettingsController" class="container create-events-bg subpage">
+  <div class="subpage-wrapper container">
+    <div class="row custom-row">
+      <div class=" col-lg-6 col-lg-offset-3">
+
+
+        <div class="row subpage-page-heading">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <img ui-sref="user.profile({uid:user._id,ptype:'single'})" ng-src="{{user.profileImageURL}}" class="user-profile-picture small" />
+            <span style="font-size:20px" title="{{user.username}}">{{user.username.length>15?user.username.substring(0,15)+'...':user.username}} - <i style="font-size:14px">{{loyalty.points}} points</i></span>
+            <a ui-sref="inbox.list" class="btn btn-sm btn-default inbox-link-btn">
+              <i style="font-size: 28px;" class="glyphicon glyphicon-inbox"></i><br/>Inbox
+            </a>
+          </div>
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="sub-menu-container" ng-swipe-left="scrollMenuRight()" ng-swipe-right="scrollMenuLeft()">
+              <ul class="sub-menu-container-wrapper">
+                <li><a id="settingsprofile" ui-sref="settings.profile">Profile</a></li>
+                <li><a id="settingsnotifications" ui-sref="settings.notifications">Notifications</a></li>
+                <li><a id="settingspicture" ui-sref="settings.picture">Display Pic</a></li>
+                <li><a id="settingsfriends" ui-sref="settings.friends">Friends</a></li>
+                <li><a id="settingsinvites" ui-sref="settings.invites">Invites</a></li>
+                <li><a id="settingsaccepted" ui-sref="settings.accepted">Attending</a></li>
+                <!--<li><a id="settingsfollowers" ui-sref="settings.followers">Followers</a></li>-->
+                <li><a id="settingspassword" ui-sref="settings.password">Password</a></li>
+                <!--<li><a id="settingsaccounts" ui-sref="settings.accounts">Social Logins</a></li>-->
+              </ul>
+            </div>
+            <i ng-click="scrollMenuLeft()"   class="glyphicon glyphicon-chevron-left smcl" ></i> <i  ng-click="scrollMenuRight()"  class="glyphicon glyphicon-chevron-right smcr" ></i>
+          </div>
+        </div>
+        <br/>
+
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <ui-view></ui-view>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <br>
+</section>
+

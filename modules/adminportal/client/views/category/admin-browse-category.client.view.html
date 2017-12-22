@@ -1,0 +1,42 @@
+
+<div ng-controller="CategoryBrowseController">
+<div class="col-md-6 col-lg-offset-3 " id="admin-search" style="">
+  <div id="custom-search-input" class="ad-search-area">
+    <div class="input-group col-md-12">
+      <input type="text" class="form-control input-lg" placeholder="search" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button">
+                          <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+    </div>
+  </div>
+  <!--Browse Category-->
+  <h3 style="text-align: center; color: #DC3912">All Categories</h3>
+  <table st-table="rowCollection" class="table table-striped">
+    <thead>
+    <tr>
+      <th>Category name</th>
+      <th>Category Display Image</th>
+      <th>Category Marker Image</th>
+      <th>Action</th>
+
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="c in categories" >
+      <td>{{c.name}}</td>
+      <td ><img src={{c.imgURL}} class="img-circle img-responsive user-image" style="background: black"></td>
+      <td ><img src={{c.markerImgURL}} class="img-circle img-responsive user-image" style="background: black"></td>
+      <td><a  class="btn-group-sm"  ui-sref="adminportal.category.editcat({cid:c._id})">edit</a>
+      <a class="btn-group-sm"  ui-sref="adminportal.category.browsecat({cid:c._id})")>delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  </div>
+  </div>
+

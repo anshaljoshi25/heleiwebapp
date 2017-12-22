@@ -1,0 +1,73 @@
+<div ng-controller="UserProfileHomeController" class="container user-profile-bg subpage">
+  <div class="subpage-wrapper container">
+    <div class="row">
+      <div class=" col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 ">
+
+
+        <div class="row wall-img-container"
+             style="background:rgba(255,255,255,0.2) url('{{profile.wallImageURL}}') no-repeat top left;background-size: cover;; background-position: 50% 50%;">
+
+          <div class="profile-close-btn" >
+           &nbsp;
+
+          </div>
+
+          <div class="wallImage-uploader" ng-if="profile.email===authentication.user.email">
+            <button class="btn btn-sm btn-white dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" ng-click="showUploadModal()" aria-haspopup="true" aria-expanded="true">
+                <i class="glyphicon glyphicon-edit"></i>
+              </button>
+            <div class="modal fade" id="wallModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Upload Wall Image</h4>
+                </div>
+                <div class="modal-body">
+                  <file-upload callback="updateWallImage"  url="/api/users/create/upload" alias="eventDisplayPic"
+                               filters="|jpg|png|jpeg|bmp|" savedpath="newWallImage"><i class="glyphicon glyphicon-edit " style="color: #5B5C59;"></i>
+                  </file-upload>
+                </div>
+                <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-default" data-dismiss="modal"></button> -->
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+          </div>
+          <img ng-src="{{profile.profileImageURL}}" class="img-responsive profile-image">
+          <span class="profile-name">{{profile.firstName + " "+ profile.lastName}}</span>
+        </div>
+
+        <div class="row data-container first-container">
+          <!--<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">-->
+          <h3>About me:</h3>
+          Hi, I am {{profile.firstName}}. I live in {{profile.address.city}}, {{profile.address.country}}<br>
+          <!--</div>-->
+        </div>
+        <div class="row data-container">
+          <!--<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">-->
+
+          <h3>Going to events:</h3>
+          <icon-list enable-search="true" listuri="/api/events/accepted" list-params="id={{userId}}"  searchuri="/api/events/accepted/search" search-params="id={{userId}}"  search-field="name" local-search="false" mode="grid"  icon="eventDisplayPic" content="name" click-func="showEventPage(obj)"></icon-list>
+          <!--</div>-->
+        </div>
+        <div class="row data-container">
+          <!--<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">-->
+          <h3>Friends:</h3>
+          <!-- <icon-list enable-search="true" listuri="/api/users/friends/list"  list-params="id={{userId}}" searchuri="/api/users/search/friends" search-params="id={{userId}}" mode="list" search-field="firstName" local-search="false"  icon="profileImageURL" content="firstName" click-func="showFriendProfile(obj)"></icon-list> -->
+          <div ng-if="f.status==='1'" class="friend-request" ng-repeat=" f in  allFriends | orderBy:'-created' track by $index" ng-init="u=f.friend._id===user._id?f.user:f.friend">
+            <img ng-src="{{u.profileImageURL}}"/><br/>
+            <span>
+              {{u.firstName + " " + u.lastName}}<br/>
+            </span>
+          </div>
+          <!--</div>-->
+        </div>
+        <br/>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>

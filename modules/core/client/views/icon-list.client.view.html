@@ -1,0 +1,32 @@
+<div class="icon-list-bg">
+  <div class="icon-list-actions">
+    <span class="pull-right">{{mode | uppercase}}</span>
+    <switch id="modeId" name="modeName" ng-model="modeWatch" class="green"></switch>
+    <search-field ng-show="enableSearch+''==='true'" search-toggle-func="searchMode()" ng-model="searchText"></search-field>
+    <div class="clearfix"></div>
+  </div>
+  
+  <div ng-if="mode==='grid'">
+    <div class="icon-list"  ng-repeat="li in list | filter:{'{{searchField}}':searchText} | limitTo: perPage*page  track by $index " ng-click="clickFunc({obj:li})" style="background-image: url({{li[icon]}})" title="{{li[content].length>=20?li[content].substring(0,20)+'..':li[content]}}"> 
+
+      <span class="" >{{li[content].length>=5?li[content].substring(0,5)+'..':li[content]}}</span>
+    
+    </div>
+    <div ng-show="showLoadMore" class="icon-list transparent" ng-click="loadMore()"> 
+      <i class="glyphicon glyphicon-option-horizontal"></i>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div ng-if="mode==='list'">
+    <div class="icon-list-ul" ng-repeat="li in list | filter:{name:searchText} | limitTo: perPage*page track by $index " ng-click="clickFunc({obj:li})" >
+      <div class="pull-left">
+        <img class="img-circle" ng-src="{{li[icon]}}" />
+      </div>
+      <div class="pull-left" >{{li[content].length>=30?li[content].substring(0,30)+'..':li[content]}}</div>
+      <div class="clearfix"></div>
+    </div>
+    <div ng-show="showLoadMore" class="btn btn-block btn-default btn-white" ng-click="loadMore()">Load More ...</div>
+  </div>
+  <!-- <div ng-show="customLimit<listarray.length" class="btn btn-block btn-default btn-primary-custom"  ng-click="incrementLimit()">Load More</div> -->
+  <!--<a ng-show="customLimit < originalLimit" href ng-click="incrementLimit()"><i  class="glyphicon glyphicon-chevron-left load-more-btn "></i></a>-->
+</div>

@@ -1,0 +1,77 @@
+<section ng-controller="AdminHomeController" style="background: rgba(221, 221, 221, 0.51);">
+  <div class="container-fluid">
+
+    <div id="wrapper">
+
+      <nav id="navbar2" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <a style="margin-left: 15px;" type="button" class="navbar-toggle pull-left" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-2">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <a class="logo" href="#">Admin Panel</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav navbar-right sidemenu">
+              <li class="header-li">Overview</li>
+              <li><a ui-sref="adminportal.dash" href="/adminportal/dash">
+                Dashboard <span class="icon"></span></a></li>
+              <li class="header-li">Manage</li>
+              <li>
+
+                <!--<div class="dropdown1">-->
+                <a id="hide" class="dropbtn1" href="/adminportal/events"> Events <span class="icon"></span></a>
+                <!--<div id="dd-list" class="dropdown-content1" style="left:0;">-->
+                  <!--<a href="#">Search</a>-->
+                  <!--<a href="/adminportal/events">View All</a>-->
+                  <!--<a href="#">Add New</a>-->
+                  <!--<a href="#">Modify/Update</a>-->
+                  <!--<a href="#">Event Categories</a>-->
+                  <!--<a href="#">Event Types</a>-->
+
+                <!--</div>-->
+                <!--</div>-->
+              </li>
+              <li>
+                <a id="hide" class="dropbtn1" href="/adminportal/deals"> Deals <span class="icon"></span></a>
+              </li>
+              <li>
+                <a ui-sref="adminportal.category" href="/adminportal/category"> Categories <span
+                  class="icon"></span></a>
+              </li>
+              <li><a ui-sref="adminportal.loyalty.plan">Loyalty Plans <span
+                class="icon"></span></a></li>
+              <li><a ui-sref="adminportal.users" href="/adminportal/users">
+                Users <span class="icon"></span></a></li>
+              <li><a ui-sref="adminportal.pay">Ambassadors </a>
+              </li>
+              <li class="header-li">Extra</li>
+              <li>
+                <!--ui-sref="adminportal.settings"-->
+                <a href="/adminportal/settings">
+                  Settings <span class="icon"></span>
+                </a>
+              </li>
+              <li><a href="#">Sign out <span class="icon"></span></a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-lg-12">
+        <ui-view></ui-view>
+      </div>
+    </div>
+
+  </div>
+
+
+</section>

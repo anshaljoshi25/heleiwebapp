@@ -1,0 +1,35 @@
+<div>
+
+	<div ng-if="isArray">
+		<div id="scat-img-{{o._id}}" class="custom-select-cat-selected" ng-repeat="o in selected">
+			<div class="csc-img-selected">
+				<img  ng-src="{{o.imgURL}}" title="{{o.name}}"  />
+			</div>
+			<div class="csc-val">{{o.name | uppercase}}</div>
+		</div>
+	</div>
+	<div ng-if="!isArray">
+		<div id="scat-img-{{selected._id}}" class="custom-select-cat-selected" >
+			<div class="csc-img-selected">
+				<img  ng-src="{{selected.imgURL}}" title="{{selected.name}}"  />
+			</div>
+			<div class="csc-val">{{selected.name | uppercase}}</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<button ng-click="omniSelect()" class="btn btn-small btn-orange" style="border: 1px solid;border-color: #EE7322;">Select Category</button>
+	<div style="clear: left"></div>
+	<div id="categoryPopup" ng-click="omniSelect($event)" class="popup-backdrop">
+		<div class="popup popup-blue">
+			<span class="pull-left popup-heading">Select Categories</span>
+			<span class="pull-right popup-close" ng-click="omniSelect()"><i class="glyphicon glyphicon-remove"></i></span>
+			<span class="clearfix"></span>
+			<div id="cat-img-{{o._id}}" class="custom-select-cat" ng-repeat="o in opts">
+				<div class="csc-img">
+					<img  ng-src="{{o.imgURL}}" title="{{o.name}}"  ng-click="selectCat(o)"/>
+				</div>
+				<div class="csc-val">{{o.name | uppercase}}</div>
+			</div>
+		</div>
+	</div>
+</div>

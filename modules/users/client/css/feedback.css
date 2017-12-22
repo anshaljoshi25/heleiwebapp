@@ -1,0 +1,62 @@
+.feedback-bg{
+    width: 100%;
+    position: absolute;
+    background: #eee;
+}
+.feedback-container{
+    margin-top: 20px;
+}
+
+.feedback-container .form-control{
+    color:black;
+}
+
+
+.star-rating {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+.star-rating .star {
+    padding: 1px;
+    color: #ddd;
+    font-size: 22px;
+    /* text-shadow: .05em .05em #aaa; */
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.star-rating .star.filled {
+    color: #F00;
+}
+.star-rating.readonly .star.filled {
+    color: #666;
+}
+.feedback-divider{
+    width: 80px;
+    height: 3px;
+    margin-bottom: 20px;
+    margin: 20px auto 10px auto;
+    background-color: #0DB9F0;
+}
+.feedback-submit{
+   width: 100%;
+}
+.feedback-label{
+    font-size: 12px;
+}
+.feedback-success{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 200px;
+    background: #eee;
+}
+.feedback-text{
+    color:black;
+    border: 1px solid black;
+    background: white;
+    height: 40px;
+}

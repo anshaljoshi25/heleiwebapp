@@ -1,0 +1,82 @@
+<section class="row" ng-controller="EditProfileController">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="signin" novalidate autocomplete="off">
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" required>
+          <div ng-messages="userForm.firstName.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">First name is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required>
+          <div ng-messages="userForm.lastName.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Last name is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email" lowercase required>
+          <div ng-messages="userForm.email.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Email address is required.</p>
+            <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" class="form-control" ng-model="user.username" placeholder="Username" lowercase required>
+          <div ng-messages="userForm.username.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Username is required.</p>
+          </div>
+        </div>
+        <div class="form-group" >
+          <label for="phone">Phone No. <small style="color:#aaaaaa">[format : +11234567890]</small></label>
+          <input ng-value="{{user.phone}}" type="text" id="phone" name="phone" class="form-control" ng-model="user.phone" placeholder="Phone No.">
+          <div ng-show="invalidPhone" role="alert">
+            <p class="help-block " >Phone number is invalid [correct format is : +1234567890]</p>
+          </div>
+        </div>
+        <div class="form-group" >
+          <label for="gender">Gender</label>
+          <select class="form-control" id="gender" name="gender" ng-model="user.gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <!-- <hr/> -->
+        <br/><br/>
+        <h4>Address</h4>
+        <div class="form-group" >
+          <label for="street">Street</label>
+          <input type="text" id="street" name="street" class="form-control" ng-model="user.address.street" placeholder="Street Address">
+        </div>
+        <div class="form-group" >
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" class="form-control" ng-model="user.address.city" placeholder="City/Town">
+        </div>
+        <div class="form-group" >
+          <label for="state">State</label>
+          <input type="text" id="state" name="state" class="form-control" ng-model="user.address.state" placeholder="State">
+        </div>
+        <div class="form-group" >
+          <label for="country">Country</label>
+          <!--<input type="text" id="country" name="country" class="form-control" ng-model="user.address.country" placeholder="country">-->
+          <select class="form-control" id="country" name="country" ng-model="user.address.country" pvp-country-picker="name"></select>
+        </div>
+        <div class="text-center form-group">
+          <br/>
+          <button type="submit" class="btn btn-block btn-blue">Save Profile</button>
+          <br/>
+        </div>
+        <div ng-show="success" class="text-center text-success">
+          <strong>Profile Saved Successfully</strong>
+        </div>
+        <div ng-show="error" class="text-center text-danger">
+          <strong ng-bind="error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

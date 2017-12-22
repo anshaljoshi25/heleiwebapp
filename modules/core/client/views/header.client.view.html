@@ -1,0 +1,213 @@
+<div class="container header-container" ng-controller="HeaderController">
+  <div ng-http-loader ttl="1" template="/modules/core/client/views/loader.tpl.html"></div>
+  <div ng-hide="skipIntroKV" class="instructions-wrapper">
+    <div class="simain">
+      <div class="item" style="">
+        <img src="/modules/core/client/img/inst/s_one.png" />
+      </div>
+      <div class="item" style="">
+        <img src="/modules/core/client/img/inst/s_two.png" />
+      </div>
+      <div class="item" style="">
+        <img src="/modules/core/client/img/inst/s_three.png" />
+      </div>
+      <div class="item" style="">
+        <img src="/modules/core/client/img/inst/s_four.png" />
+      </div>
+      <div class="item" style="">
+        <img src="/modules/core/client/img/inst/s_five.png" />
+      </div>
+      <div class="item" style="">
+        <img src="/modules/core/client/img/inst/s_six.png" />
+      </div>
+      <div class="item" style="">
+        <img src="/modules/core/client/img/inst/s_seven.png" />
+      </div>
+      <div class="item" style="">
+        <img src="/modules/core/client/img/inst/s_eigth.png" />
+      </div>
+      <div class="item" style="">
+        <img src="/modules/core/client/img/inst/s_nine.png" />
+      </div>
+      <div class="item" style="">
+        <img src="/modules/core/client/img/inst/s_ten.png" />
+      </div>
+      <div class="item" style="">
+        <img src="/modules/core/client/img/inst/s_eleven.png" />
+      </div>
+    </div>
+  </div>
+  <div ng-hide="skipIntroKV" class="skip-btn" ng-click="skipIntro()">
+  <a class="btn  btn-blue">Skip <i class="glyphicon glyphicon-chevron-right"></i></a>
+  </div>
+  <div ng-hide="skipIntroKV" class="inst-btns">
+    <div class="left-btn" ng-click="instSlide('left')">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+    </div>
+    <div class="right-btn" ng-click="instSlide('right')">
+      <i class="glyphicon glyphicon-chevron-right"></i>
+    </div>
+  </div>
+  <div class="navbar-header">
+    <!--<button class="navbar-toggle burger-box" type="button" ng-click="toggleCollapsibleMenu()">-->
+    <!--<span class="sr-only">Toggle navigation</span>-->
+    <!--<span class="icon-bar"></span>-->
+    <!--<span class="icon-bar"></span>-->
+    <!--<span class="icon-bar"></span>-->
+    <!--</button>-->
+
+
+    <!-- Left Slide Menu -->
+    <div class="thick-box" id="slideMeThick" ng-click="showHideMenu($event)" ng-show="showSlideMenu">
+      <div ng-show="showSlideMenu" class="slide-menu"  id="slide-me">
+        <span class="slide-menu-logo" ng-hide="authentication.user">
+          <img src="/modules/core/client/img/helei-icon.png" >helei
+
+        </span>
+        <span class="slide-menu-logo" ng-show="authentication.user">
+          <img ng-src="{{user.profileImageURL}}" class="img-responsive slide-profile-img " ><div class="slide-username">{{user.username}}</div>
+        </span>
+        <span class="slide-menu-close sm-links" ng-click="showHideMenu()">
+          <i class="glyphicon glyphicon-chevron-left sm-links"></i> </span>
+          <ul class="slide-menu-list">
+            <li>&nbsp;</li>
+          </ul>
+          <ul class="slide-menu-list" ng-show="authentication.user">
+
+            <li ui-sref-active="active">
+              <a ui-sref="settings.profile" class=" sm-links"># Edit Profile</a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="settings.picture" class=" sm-links"># Change Profile Picture</a>
+            </li>
+            <li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
+              <a ui-sref="settings.password" class=" sm-links"># Change Password</a>
+            </li>
+
+            <!--<li ui-sref-active="active">-->
+            <!--<a ui-sref="settings.accounts"># Manage Social Accounts</a>-->
+            <!--</li>-->
+
+            <li class="divider"></li>
+            <li>
+              <a href="/api/auth/signout" target="_self" class=" sm-links"># Signout</a>
+            </li>
+
+          </ul>
+          <ul class="slide-menu-list">
+            <li ng-hide="authentication.user">
+              <a ui-sref="authentication.signin" class=" sm-links"># Sign In</a>
+            </li>
+            <hr/>
+
+            <!--<li>-->
+            <!--<a><i class="glyphicon glyphicon-star"></i> Upgrade To Pro-Plan</a>-->
+            <!--</li>-->
+
+            <li>
+              <a  ui-sref="feedback" class=" sm-links"><i class="glyphicon glyphicon-edit sm-links"></i> Give Feedback</a>
+            </li>
+            <li>
+              <a ng-click="showIntro()" href="javascript:void(0)" class=" sm-links"><i class="glyphicon glyphicon-bookmark sm-links"></i> Help</a>
+            </li>
+
+            <!--<li>-->
+            <!--<a><i class="glyphicon glyphicon-bell"></i> Notification Settings</a>-->
+            <!--</li>-->
+
+          </ul>
+
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="margin-top:10px">
+            <button class="drop-dots" ng-click="showHideMenu()" id="drop-dot-out">
+              <i class="glyphicon glyphicon-option-vertical"></i>
+            </button>
+            <!--<user-menu-icon class="hidden-xs" enablemenu="true"></user-menu-icon>-->
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:10px; text-align:center">
+            <a ui-sref="home" class="navbar-brand ">helei</a><br/>
+            <small style="font-size: 10px">Discover Events Near You!</small>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <a id="menu-search" class="search-btn" ui-sref="search">
+              <img src="/modules/core/client/img/search-icon.png"/>
+              <span class="hidden-sm hidden-xs hidden-md">Search</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="brand-link-holder">
+
+
+        <a style="float:none" class="clearfix"></a>
+      </div>
+
+
+      <!-- links holder -->
+      <div class="container-fluid links-holder">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <span class="notification-pop" ng-if="user.notificationCount">{{user.notificationCount}}</span>
+            <a id="menu-settings" href="{{user.notificationCount>0?'/settings/notifications':'/settings/profile'}}">
+              <img src="/modules/core/client/img/settings-icon.png"/><br/>
+              <span ng-if="authentication.user!==undefined && authentication.user!==''">Profile</span>
+              <span ng-if="authentication.user===undefined || authentication.user===''">SignIn</span>
+              <!--<i class="glyphicon glyphicon-user"></i>-->
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <a id="menu-home" ui-sref="home">
+              <img src="/modules/core/client/img/home-icon.png"/><br/>
+              <span>Home</span>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <a id="menu-events-create" ui-sref="events.create">
+              <img src="/modules/core/client/img/create-icon.png"/><br/>
+              <span>Create</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">-->
+    <!--<ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">-->
+    <!--<li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">-->
+    <!--<a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>-->
+    <!--<ul ng-switch-when="dropdown" class="dropdown-menu">-->
+    <!--<li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">-->
+    <!--<a ui-sref="{{subitem.state}}" ng-bind="subitem.title"></a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--<a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--&lt;!&ndash;<ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">&ndash;&gt;-->
+    <!--&lt;!&ndash;<li ui-sref-active="active">&ndash;&gt;-->
+    <!--&lt;!&ndash;<a ui-sref="authentication.signup">Sign Up</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li class="divider-vertical"></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li ui-sref-active="active">&ndash;&gt;-->
+    <!--&lt;!&ndash;<a ui-sref="authentication.signin">Sign In</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+
+    <!--</nav>-->
+
+    <!-- quick actions -->
+    <!--<div class="quick-footer-actions" ng-click="showQuickMenu=!showQuickMenu">-->
+    <!--<ul ng-show="showQuickMenu" id="qfaList">-->
+    <!--<li ui-sref="inbox.list"><i class="glyphicon glyphicon-comment"></i> Chat</li>-->
+    <!--<li ui-sref="search.find"><i class="glyphicon glyphicon-search"></i> Search</li>-->
+    <!--</ul>-->
+    <!--<div class="quick-footer-actions-button">-->
+    <!--<a href="javascript:void(0)">+</a>-->
+    <!--</div>-->
+    <!--</div>-->
+
+  </div>

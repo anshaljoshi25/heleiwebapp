@@ -1,0 +1,83 @@
+<div ng-controller="InboxShowConversationController" class="container inbox-online-bg subpage">
+  <div class="subpage-wrapper container">
+    <div class="row">
+      <div class=" col-lg-6 col-lg-offset-3">
+
+        <div class="subpage-page-heading">
+
+          <div>
+            <i class="glyphicon glyphicon-chevron-left " ui-sref="inbox.list"></i>
+            <img ng-if="profileType==='single'" ng-src="{{friendProfile.profileImageURL}}" class="conv-profile-image"
+                 ui-sref="user.profile({uid:userId,ptype:profileType})">
+            <img ng-if="profileType==='group'" ng-src="{{friendProfile.profileImageURL}}" class="conv-profile-image">
+            <b ui-sref="user.profile({uid:userId,ptype:profileType})">{{friendProfile.firstName}} <i
+              ng-hide="allMessages.length" style="font-size: 10px">Loading ...</i> </b>
+
+            <!--<i ng-show="allMessages.length" >Profile ...</i>-->
+            <!--<button type="button" class="btn show-profile" data-toggle="modal" data-target="#myModal">Profile</button>-->
+            <i class="glyphicon glyphicon-trash pull-right" ng-show="showTrash===true" ng-click="removeChat()"></i>
+            <!--{{$scope.onSelect.value}}-->
+          </div>
+        </div>
+        <br/>
+
+        <div class="chat-window" id="chatWindow">
+          <div class="chatarea" id="chatArea">
+
+            <div class="loadpreviousbtn" ng-click="receivelastchat()">
+              <a href="javascript:void(0)">
+                <!--{{$scope.renderGroup._id === ''?'receivelastchat':'receivelastgroupchat'}}-->
+
+                <span>Load previous messages </span></i>
+              </a>
+            </div>
+
+            <div class="panel-body msg_container_base">
+
+              <div id="msg{{m._id}}" ng-mouseleave="selectUserChatMU($event)" ng-mouseup="selectUserChatMU($event)"
+                   ng-mousedown="selectUserChatMD($event,m)"
+                   ng-class="m.from.email===me.email?'base-sent-friend':'base-recieved-friend'"
+                   class="msg_container base_sent " ng-repeat=" m in allMessages | orderBy:'created' track by $index">
+                <!--<input type="checkbox" class="pull-left select-checkbox" ng-show="value1.value === 'show' " ng-model="p._id"/>-->
+                <div class="select-checkbox" ng-show="m.isSelected === true ">
+                  <input type="checkbox" checked class="input-cb"/>
+
+                </div>
+                <!--{{m.from.email}}-{{me.email}}&#45;&#45;{{m.from.email===me.email?'base-sent-friend':'base-recieved-friend'}}-->
+                <img ng-hide="m.from.email===me.email"
+                     ng-if="m.from.email===friendProfile.email || $scope.renderGroup._id !== '' "
+                     ng-src="{{ $scope.renderGroup._id === ''?friendProfile.profileImageURL:m.from.profileImageURL}}"
+                     class=" img-responsive chat-avatar">
+                <div class="messages msg_sent">
+                  <p>{{m.message}}</p>
+                  <time datetime="2009-11-13T20:00">{{m.from.displayName}} • {{m.created | parseDate }}</time>
+                </div>
+                <img ng-if="m.from.email===me.email" ng-src="{{me.profileImageURL}}"
+                     class=" img-responsive chat-avatar">
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class=" chat-text-field">
+          <div class="chatbar">
+              <textarea id="chatTxtBox" ng-click="sendChatText($event)"
+                        ng-keydown="($event.which === 13 && $event.shiftKey === false)?sendChatText($event):0"
+                        type="text" class="form-control" placeholder="Type a message..." aria-describedby="basic-addon2"
+                        ng-model="chatMsg">
+                </textarea>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>
+
+

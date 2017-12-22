@@ -1,0 +1,25 @@
+<div ng-controller="InboxListController" class="container inbox-online-bg subpage">
+  <div class="subpage-wrapper container">
+    <div class="row">
+      <div class=" col-lg-6 col-lg-offset-3">
+
+        <div class="row subpage-page-heading">
+
+          <div ng-click="goBack()" class="col-lg-1 col-md-2 col-sm-3 col-xs-3 close-btn">
+            <i class="glyphicon glyphicon-remove "></i>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-8">Inbox</div>
+
+          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 groupChat">
+            <div ui-sref="inbox.groupchat">
+          <img src="./modules/inbox/client/images/groupchat.png" class="groupChatIcon">
+              </div>
+          </div>
+        </div>
+
+        <user-list  inboxoptions="options" uarray="profile" callback="showProfile" ></user-list>
+
+      </div>
+    </div>
+  </div>
+</div>

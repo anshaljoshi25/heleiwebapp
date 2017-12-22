@@ -1,0 +1,28 @@
+<section class="row" ng-controller="ManageInvitesController">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="invites-list" ng-show="invites.length">
+      <ul>
+        <li ng-repeat="invite in invites track by $index" class="ilulli">
+          <div class="iluldp">
+            <img ng-src="{{invite.eventDisplayPic!==undefined?invite.eventDisplayPic+'_64x64':invite.category.imgURL}}" />
+          </div>
+          <div  ui-sref="events.show({eid:invite._id})" class="ilulcontent">
+            <span>{{invite.name}}</span>
+          </div>
+          <div class="ilulactions">
+            <a class="" ng-click="acceptEvent(invite)">
+              <i class="glyphicon glyphicon-ok"></i> Go
+            </a>
+            <a class="" ng-click="declineEvent(invite)">
+              <i class="glyphicon glyphicon-remove"></i> Decline
+            </a>
+          </div>
+          <div class="clearfix"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="alert alert-warning" ng-hide="invites.length">
+      No Invites!
+    </div>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+<section ng-controller="AdminUserController">
+  <h2 class="ad-page-heading">Users</h2>
+  <div class="user-panel ">
+    <div class="panel panel-primary " >
+      <div class="panel-heading" >
+        <div class="panel-select-list">
+          <label for="sel1">Select User Type:</label>
+          <select class="panel-select-list-control" id="sel1">
+            <option>Users</option>
+            <option>Admin</option>
+            <option>Premium Users</option>
+            <option>Venue Owners</option>
+            <option>Analyst</option>
+          </select>
+        </div>
+          <!--<h3 class="panel-title pull-left">User</h3>-->
+          <div class="input-group">
+            <input type="text" class="panel-form-control" placeholder="filter" aria-describedby="basic-addon1"
+                   style="margin-left: 10px;">
+            <button type="button" class="btn btn-default panel-form-btn">Export</button>
+            <button type="button" class="btn btn-default panel-form-btn">Add</button>
+            <button type="button" class="btn btn-default panel-form-btn">Edit</button>
+            <button type="button" class="btn btn-default panel-form-btn">Delete</button>
+          </div>
+
+
+
+
+
+      </div>
+      <div class="panel-body">
+        <!-- Table -->
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Select</th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Enable</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>{{id}}</td>
+              <td>{{name}}</td>
+              <td>{{email}}</td>
+              <td>{{status}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+<section class="row" ng-controller="ManageNotificationsController">
+  <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+    <!--<div class="row">-->
+      <!---->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <br>
+    <div class="notifications-list" ng-show="notifications.length">
+      <ul>
+        <li  ng-repeat="notif in notifications | orderBy:'-updated' track by $index" >
+          <div class="dp">
+            <img ng-src="{{notif.actor.profileImageURL!==undefined?notif.actor.profileImageURL:'/modules/core/client/img/profile/default.png'}}"/>
+          </div>
+          <div class="list-content" ui-sref="{{notif.actionURI}}">
+            {{notif.message.replace('{val1}',notif.actor.firstName+' '+notif.actor.lastName)}} <br/>
+            <span class="content-date">
+              {{notif.updated | toSec | date:'HH:mm, MMM dd, yyyy'}}
+            </span>
+          </div>
+          <div class="actions" ng-click="archiveNotif(notif)">
+            <i class="glyphicon glyphicon-remove"></i>
+          </div>
+          <div class="clearfix"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="alert alert-warning" ng-hide="notifications.length">
+      No Notifications!
+    </div>
+  </div>
+</section>
